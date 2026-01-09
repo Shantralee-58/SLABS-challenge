@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SouthernLabs Challenge 🏆</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>SouthernLabs Challenge 🏆</h1>
+    <p class="instructions">
+      You have 3 hours to complete 40 logic-based questions.<br>
+      Pass mark is 60%. You may skip questions.
+    </p>
+
+    <div class="student-box">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <select id="course" required>
+        <option value="">Select Course</option>
+        <option value="applied_software_development">Applied Software Development</option>
+        <option value="software_engineering">Software Engineering</option>
+        <option value="it_concepts">IT Concepts</option>
+      </select>
+      <button id="startBtn">Start Test</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("startBtn").addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const course = document.getElementById("course").value;
+
+      if(!name || !email || !course){
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      sessionStorage.setItem("studentName", name);
+      sessionStorage.setItem("studentEmail", email);
+      sessionStorage.setItem("studentCourse", course);
+      sessionStorage.setItem("currentQuestion", "0");
+      sessionStorage.setItem("score", "0");
+      sessionStorage.setItem("startTime", new Date());
+
+      window.location.href = "test.html";
+    });
+  </script>
+</body>
+</html>
+

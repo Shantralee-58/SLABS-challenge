@@ -1,0 +1,24 @@
+{
+  "name": "slabs-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shantralee-58/SLABS-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shantralee-58/SLABS-challenge/issues"
+  },
+  "homepage": "https://github.com/Shantralee-58/SLABS-challenge#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemailer": "^7.0.12"
+  }
+}
