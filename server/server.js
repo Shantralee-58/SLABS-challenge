@@ -9,11 +9,24 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,'../public')));
 
 // -------------------- SENDGRID CONFIG --------------------
+if (!process.env.SENDGRID_API_KEY) {
+  console.error("Error: SENDGRID_API_KEY not set in environment variables!");
+  process.exit(1);
+}
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+if (!process.env.ADMIN_EMAIL) {
+  console.error("Error: ADMIN_EMAIL not set in environment variables!");
+  process.exit(1);
+}
 
 // -------------------- SUBMIT RESULTS --------------------
 app.post("/submit-results", async (req, res) => {
   const { studentName, studentEmail, studentCourse, score, totalQuestions, percent } = req.body;
+
+  if (!studentName || !studentEmail) {
+    return res.status(400).send({ status: "error", message: "Student name and email are required" });
+  }
 
   const msg = {
     to: [process.env.ADMIN_EMAIL, studentEmail], // send to admin and student
@@ -30,15 +43,16 @@ app.post("/submit-results", async (req, res) => {
   };
 
   try {
-    await sgMail.send(msg);
-    console.log("Email sent successfully");
+    const response = await sgMail.send(msg);
+    console.log("Email sent successfully:", response[0].statusCode);
     res.send({ status: "success", message: "Email sent successfully" });
   } catch (error) {
-    console.error("Failed to send email:", error);
+    console.error("Failed to send email:", error.response ? error.response.body : error);
     res.status(500).send({ status: "error", message: error.message });
   }
 });
 
+// -------------------- START SERVER --------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running on port", PORT));
 
