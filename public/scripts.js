@@ -118,19 +118,29 @@ document.getElementById("skipBtn").addEventListener("click",()=>{
 });
 
 // -------------------- END TEST --------------------
-function endTest(){
-  const percent = Math.floor(score/questions.length*100);
-  const pass = percent>=passMark;
-  finalResultEl.innerHTML=`<p class="${pass?'pass':'fail'}">
-    ${pass?'PASSED ✅':'FAILED ❌'}<br>
+function endTest() {
+  const percent = Math.floor((score / questions.length) * 100);
+  const pass = percent >= passMark;
+
+  finalResultEl.innerHTML = `<p class="${pass ? 'pass' : 'fail'}">
+    ${pass ? 'PASSED ✅' : 'FAILED ❌'}<br>
     Score: ${percent}% (${score}/${questions.length})
   </p>`;
 
   // Send results to server
-  fetch("/submit-results",{
-    method:"POST",
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({studentName, studentEmail, studentCourse, score, totalQuestions, percent})
-  });
+  fetch("/submit-results", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      studentName,
+      studentEmail,
+      studentCourse,
+      score,
+      totalQuestions,
+      percent
+    })
+  })
+  .then(res => res.json())
+  .then(data => console.log('Email status:', data.message))
+  .catch(err => console.error('Email error:', err));
 }
-

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const path = require("path");
+require('dotenv').config();  // Load .env variables
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,17 +12,18 @@ app.use(express.static(path.join(__dirname,'../public')));
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'yourgmail@gmail.com',     // YOUR EMAIL
-    pass: 'your_app_password'        // App Password (2FA recommended)
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
   }
 });
 
 // -------------------- SUBMIT RESULTS --------------------
-app.post("/submit-results", (req,res)=>{
-  const {studentName, studentEmail, studentCourse, score, totalQuestions, percent} = req.body;
+app.post("/submit-results", (req, res) => {
+  const { studentName, studentEmail, studentCourse, score, totalQuestions, percent } = req.body;
+
   const mailOptions = {
-    from: 'yourgmail@gmail.com',
-    to: `idah@southernlabs.com, ${studentEmail}`,
+    from: process.env.GMAIL_USER,
+    to: `${process.env.ADMIN_EMAIL}, ${studentEmail}`,  // CC to admin
     subject: `SouthernLabs Challenge Results: ${studentName}`,
     html: `
       <h2>SouthernLabs Challenge Results</h2>
@@ -29,14 +31,20 @@ app.post("/submit-results", (req,res)=>{
       <p><strong>Email:</strong> ${studentEmail}</p>
       <p><strong>Course:</strong> ${studentCourse}</p>
       <p><strong>Score:</strong> ${score}/${totalQuestions} (${percent}%)</p>
-      <p><strong>Status:</strong> ${percent>=60?'PASSED ✅':'FAILED ❌'}</p>
+      <p><strong>Status:</strong> ${percent >= 60 ? 'PASSED ✅' : 'FAILED ❌'}</p>
     `
   };
-  transporter.sendMail(mailOptions,(err,info)=>{
-    if(err){ console.error(err); res.status(500).send("Error sending email"); return; }
-    res.send({status:"success", info});
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.error("Email error:", err);
+      res.status(500).send({ status: "error", message: err.message });
+      return;
+    }
+    console.log("Email sent:", info.response);
+    res.send({ status: "success", message: "Email sent successfully" });
   });
 });
 
-app.listen(3000,()=>console.log("Server running on http://localhost:3000"));
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));
 
