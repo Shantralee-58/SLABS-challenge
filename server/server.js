@@ -37,6 +37,10 @@ app.post("/submit-results", async (req, res) => {
       <p><strong>Student:</strong> ${studentName}</p>
       <p><strong>Email:</strong> ${studentEmail}</p>
       <p><strong>Course:</strong> ${studentCourse}</p>
+      <p><strong>ID/Passport No:</strong> ${studentID}</p>
+      <p><strong>Contact Number:</strong> ${studentContact}</p>
+      <p><strong>Home Address:</strong> ${studentAddress}</p>
+      <p><strong>Age:</strong> ${studentAge}</p>
       <p><strong>Score:</strong> ${score}/${totalQuestions} (${percent}%)</p>
       <p><strong>Status:</strong> ${percent >= 60 ? 'PASSED ✅' : 'FAILED ❌'}</p>
     `
