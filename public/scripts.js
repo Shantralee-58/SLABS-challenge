@@ -193,13 +193,25 @@ document.getElementById("startBtn").addEventListener("click", () => {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const course = document.getElementById("course").value;
-  const idNumber = document.getElementById("idNumber").value.trim();
-  const age = document.getElementById("age").value;
+  const studentID = document.getElementById("studentID").value.trim(); 
+  const selectedAge = parseInt(document.getElementById("age").value);
   const contact = document.getElementById("contact").value.trim();
   const address = document.getElementById("address").value.trim();
 
-  if(!name || !email || !course || !idNumber || !age || !contact || !address){
+  if(!name || !email || !course || !idNumber || !contact || !address || !selectedAge){
     alert("Please fill in all fields.");
+    return;
+  }
+	// Validate SA ID
+  if (!isValidSAID(studentID)) {
+    alert("Invalid South African ID number. Please enter a valid ID.");
+    return;
+  }
+
+  // Validate age against ID
+  const realAge = getAgeFromID(studentID);
+  if (realAge !== selectedAge) {
+    alert(`Age does not match ID number. Your real age is ${realAge}.`);
     return;
   }
 
@@ -207,9 +219,9 @@ document.getElementById("startBtn").addEventListener("click", () => {
   sessionStorage.setItem("studentEmail", email);
   sessionStorage.setItem("studentCourse", course);
   sessionStorage.setItem("studentID", idNumber);
-  sessionStorage.setItem("studentAge", age);
   sessionStorage.setItem("studentContact", contact);
   sessionStorage.setItem("studentAddress", address);
+  sessionStorage.setItem("studentAge", selectedAge);
   sessionStorage.setItem("currentQuestion", "0");
   sessionStorage.setItem("score", "0");
   sessionStorage.setItem("startTime", new Date());
