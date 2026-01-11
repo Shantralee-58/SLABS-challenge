@@ -42,7 +42,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q6: Grid Puzzle", question:"▲ ▼ ▲ ▼ ▲ ?", options:["▲","▼","◆","●"], answer:1, example:"Symbols alternate in order"},
 {instructions:"Q7: Math Puzzle", question:"If 3×2=6, 4×3=12, 5×4=?, 6×5=?", options:["20,25","20,30","20,32","20,28"], answer:1, example:"Multiply numbers accordingly"},
 {instructions:"Q8: Word Logic", question:"Find the odd one out: Apple, Banana, Orange, Carrot", options:["Apple","Banana","Orange","Carrot"], answer:3, example:"One is a vegetable, others are fruits"},
-{instructions:"Q9: Number Puzzle", question:"If 2+3=10, 3+4=21, 4+5=?, 5+6=?", options:["30,35","35,41","36,45","40,50"], answer:2, example:"Follow the pattern: a+b → a*b + b"}, 
+{instructions:"Q9: Number Puzzle", question:"If 2+3=10, 3+4=21, 4+5=?, 5+6=?", options:["30,35","35,41","36,55","40,50"], answer:2, example:"Follow the pattern: a+b → a*b + b"}, 
 {instructions:"Q10: Letter Decipher", question:"If Z=1, Y=2, X=3… what is CAT?", options:["54","26","24","23"], answer:2, example:"Sum the letter values according to the reversed alphabet mapping"}, 
 // Add more questions with tricky patterns, mappings, grid puzzles 
 {instructions:"Q11: Number Logic", question:"5, 10, 20, 40, ?", options:["50","70","80","60"], answer:2, example:"Multiply by 2 each step"}, 
@@ -63,7 +63,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q26: Number Pattern", question:"5,10,20,35, ?", options:["50","55","60","65"], answer:1, example:"Differences increase +5,+10,+15,..."}, 
 {instructions:"Q27: Word Logic", question:"Antonym of 'Expand'?", options:["Contract","Extend","Open","Increase"], answer:0, example:"Opposite meaning"}, 
 {instructions:"Q28: Grid Puzzle", question:"🔴 🔵 🔴 🔵 🔴 ?", options:["🔴","🔵","🔵🔴","🔴🔴"], answer:1, example:"Symbols alternate"}, 
-{instructions:"Q29: Math Puzzle", question:"2+5=12, 3+6=21, 4+7=?", options:["30","33","35","36"], answer:2, example:"Use pattern (a+b)*a"}, 
+{instructions:"Q29: Math Puzzle", question:"2+5=12, 3+6=21, 4+7=?", options:["30","33","35","36"], answer:3, example:"Use pattern (a+b)*a"}, 
 {instructions:"Q30: Letter Series", question:"Z, X, U, Q, ?", options:["M","N","O","P"], answer:0, example:"Decreasing letter positions -2,-3,-4,-5"}, 
 {instructions:"Q31: Word Puzzle", question:"Synonym of 'Quick'?", options:["Fast","Slow","Lazy","Tardy"], answer:0, example:"Choose synonym"}, 
 {instructions:"Q32: Number Logic", question:"1,8,27,?,125", options:["49","64","81","100"], answer:1, example:"Cubes:1³,2³,..."}, 
@@ -73,7 +73,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q36: Math Logic", question:"2,6,12,20,30, ?", options:["36","42","40","38"], answer:1, example:"Pattern +4,+6,+8,..."}, 
 {instructions:"Q37: Grid Pattern", question:"🔺🔻🔺🔻 ? 🔺🔻 ?", options:["🔺🔺","🔺🔻","🔻🔺","🔻🔻"], answer:1, example:"Alternates in pairs"}, 
 {instructions:"Q38: Word Decipher", question:"HOME=34, SCHOOL=57, OFFICE=?", options:["52","53","55","54"], answer:3, example:"Sum letter values"}, 
-{instructions:"Q39: Number Puzzle", question:"1,3,6,10,15, ?", options:["20","21","19","18"], answer:0, example:"Triangular numbers"}, 
+{instructions:"Q39: Number Puzzle", question:"1,3,6,10,15, ?", options:["20","21","19","18"], answer:1, example:"Triangular numbers"}, 
 {instructions:"Q40: Logic Puzzle", question:"Circle, Triangle, Square, Circle, Triangle, ?", options:["Square","Circle","Triangle","Rectangle"], answer:0, example:"Repeats sequence"}];
 
 // -------------------- DOM ELEMENTS --------------------
