@@ -21,6 +21,7 @@
     "@sendgrid/mail": "^8.1.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "mongoose": "^9.1.2",
     "nodemailer": "^7.0.12"
   }
 }
