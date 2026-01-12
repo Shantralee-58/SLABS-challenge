@@ -2,10 +2,10 @@
 const studentName = sessionStorage.getItem("studentName") || "Student";
 const studentEmail = sessionStorage.getItem("studentEmail") || "idah@southernlabs.com";
 const studentCourse = sessionStorage.getItem("studentCourse") || "N/A";
-const studentID = sessionStorage.getItem("studentID") || "N/A";
-const studentAge = sessionStorage.getItem("studentAge") || "N/A";
+const studentDOB = sessionStorage.getItem("studentDOB") || "N/A";
 const studentContact = sessionStorage.getItem("studentContact") || "N/A";
 const studentAddress = sessionStorage.getItem("studentAddress") || "N/A";
+const studentProvince = sessionStorage.getItem("studentProvince") || "N/A";
 
 // -------------------- TEST STATE --------------------
 let currentQuestion = parseInt(sessionStorage.getItem("currentQuestion")) || 0;
@@ -32,6 +32,8 @@ function updateTimer() {
   const s = String(diff%60).padStart(2,'0');
   timerEl.textContent = `Time Left: ${h}:${m}:${s}`;
 }
+
+
 
 // -------------------- 40 TRICKY QUESTIONS --------------------
 const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 12, 20, 30, ?", options:["36","40","42","44"], answer:2, example:"Add 4, 6, 8, 10,... → next number"},
@@ -126,38 +128,24 @@ document.getElementById("skipBtn").addEventListener("click", ()=>{
 // -------------------- ANTI-CHEAT --------------------
 let cheatCount = 0;
 const maxCheats = 3;
-let testActive = true; // Track if test is running
-
+let testActive = true;
 function handleCheat(reason){
-  if(!testActive) return; // ignore after test ends
+  if(!testActive) return;
   cheatCount++;
   alert(`${reason} Violations: ${cheatCount}/${maxCheats}`);
   if(cheatCount >= maxCheats){
     alert("Too many violations. Test will end and you FAIL.");
-    endTest(true); // force fail
+    endTest(true);
   }
 }
-
-// Warn or fail on tab switch
 window.addEventListener('blur', ()=> handleCheat("Do not leave the test window!"));
-
-// Disable right-click
-window.addEventListener('contextmenu', (e)=>{
-  e.preventDefault();
-  handleCheat("Right-click is disabled!");
-});
-
-// Detect F12 / DevTools (basic)
-window.addEventListener('keydown', (e)=>{
-  if(e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key==="I")){
-    handleCheat("DevTools opening detected!");
-  }
-});
+window.addEventListener('contextmenu', (e)=>{ e.preventDefault(); handleCheat("Right-click is disabled!"); });
+window.addEventListener('keydown', (e)=>{ if(e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key==="I")) handleCheat("DevTools opening detected!"); });
 
 // -------------------- END TEST --------------------
 function endTest(forceFail=false){
-  testActive = false;       // <-- DISABLE cheat detection
-  clearInterval(timerInterval); // Stop the timer
+  testActive = false;
+  clearInterval(timerInterval);
   const percent = forceFail ? 0 : Math.floor((score / questions.length) * 100);
   const pass = !forceFail && percent >= passMark;
 
@@ -165,6 +153,7 @@ function endTest(forceFail=false){
     ${pass ? 'PASSED ✅' : 'FAILED ❌'}<br>
     Score: ${percent}% (${score}/${questions.length})
   </p>`;
+
 
   // Send results to server
   fetch("/submit-results", {
@@ -174,8 +163,8 @@ function endTest(forceFail=false){
       studentName,
       studentEmail,
       studentCourse,
-      studentID,
-      studentAge,
+      studentDOB,
+      studentProvince,
       studentContact,
       studentAddress,
       score,
@@ -193,35 +182,23 @@ document.getElementById("startBtn").addEventListener("click", () => {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const course = document.getElementById("course").value;
-  const studentID = document.getElementById("studentID").value.trim(); 
-  const selectedAge = parseInt(document.getElementById("age").value);
+  const studentDOB = document.getElementById("studentDOB").value.trim(); 
+  const studentProvince = parseInt(document.getElementById("province").value);
   const contact = document.getElementById("contact").value.trim();
   const address = document.getElementById("address").value.trim();
 
-  if(!name || !email || !course || !idNumber || !contact || !address || !selectedAge){
+  if(!name || !email || !course || !dateOfBirth || !contact || !address || !province){
     alert("Please fill in all fields.");
-    return;
-  }
-	// Validate SA ID
-  if (!isValidSAID(studentID)) {
-    alert("Invalid South African ID number. Please enter a valid ID.");
-    return;
-  }
-
-  // Validate age against ID
-  const realAge = getAgeFromID(studentID);
-  if (realAge !== selectedAge) {
-    alert(`Age does not match ID number. Your real age is ${realAge}.`);
     return;
   }
 
   sessionStorage.setItem("studentName", name);
   sessionStorage.setItem("studentEmail", email);
   sessionStorage.setItem("studentCourse", course);
-  sessionStorage.setItem("studentID", idNumber);
+  sessionStorage.setItem("studentDOB", dateOfBirth);
   sessionStorage.setItem("studentContact", contact);
   sessionStorage.setItem("studentAddress", address);
-  sessionStorage.setItem("studentAge", selectedAge);
+  sessionStorage.setItem("studentProvince", province);
   sessionStorage.setItem("currentQuestion", "0");
   sessionStorage.setItem("score", "0");
   sessionStorage.setItem("startTime", new Date());

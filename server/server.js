@@ -44,18 +44,18 @@ app.post("/submit-results", async (req, res) => {
   const {
     studentName,
     studentEmail,
-    studentID,
-    studentAge,
+    studentDOB,
     studentCourse,
     studentContact,
     studentAddress,
+    studentProvince,
     score,
     totalQuestions,
     percent
   } = req.body;
 
   // ---------- Validation ----------
-  if (!studentName || !studentEmail || !studentID || !studentAge) {
+  if (!studentName || !studentEmail || !studentDOB || !studentCourse || !studentContact || !studentAddress || !studentProvince) {
     return res.status(400).json({
       status: "error",
       message: "Missing required student information"
@@ -67,11 +67,11 @@ app.post("/submit-results", async (req, res) => {
     const newStudent = new Student({
       name: studentName,
       email: studentEmail,
-      idNumber: studentID,
-      age: studentAge,
+      dateOfBirth: studentDOB,
       course: studentCourse,
       contact: studentContact,
       address: studentAddress,
+      province: studentProvince,
       score,
       totalQuestions,
       percent,
@@ -93,11 +93,11 @@ app.post("/submit-results", async (req, res) => {
 
         <p><strong>Student:</strong> ${studentName}</p>
         <p><strong>Email:</strong> ${studentEmail}</p>
-        <p><strong>ID / Passport:</strong> ${studentID}</p>
-        <p><strong>Age:</strong> ${studentAge}</p>
+        <p><strong>Date of Birth</strong> ${studentDOB}</p>
         <p><strong>Course:</strong> ${studentCourse}</p>
         <p><strong>Contact:</strong> ${studentContact}</p>
         <p><strong>Address:</strong> ${studentAddress}</p>
+	<p><strong>Province:</strong> ${studentProvince}</p>
 
         <hr>
 
