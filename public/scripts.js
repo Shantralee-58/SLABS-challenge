@@ -37,10 +37,10 @@ function updateTimer() {
 
 // -------------------- 40 TRICKY QUESTIONS --------------------
 const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 12, 20, 30, ?", options:["36","40","42","44"], answer:2, example:"Add 4, 6, 8, 10,... → next number"},
-{instructions:"Q2: Word Decipher", question:"If A=1, B=20, C=3, what is DOG?", options:["64","57","48","50"], answer:0, example:"Sum letter values according to mapping A=1,B=20,C=3,..."},
+{instructions:"Q2: Word Decipher", question:"If A=1, B=20, C=3, what is DOG?", options:["62","57","48","50"], answer:0, example:"Sum letter values according to mapping A=1,B=20,C=3,..."},
 {instructions:"Q3: Grid Pattern", question:"⬛⬜⬛⬜ ⬛⬜⬛ ?", options:["⬛","⬜","⬜⬛","⬛⬛"], answer:1, example:"Pattern alternates black and white squares"}, 
 {instructions:"Q4: Math Logic", question:"1, 4, 9, 16, 25, ?", options:["30","36","35","40"], answer:1, example:"Squares of 1,2,3,4,5 → next square"},
-{instructions:"Q5: Letter Sequence", question:"A, C, F, J, O, ?", options:["T","S","U","R"], answer:1, example:"Positions of letters increase cumulatively"},
+{instructions:"Q5: Letter Sequence", question:"A, C, F, J, O, ?", options:["T","S","U","R"], answer:2, example:"Positions of letters increase cumulatively"},
 {instructions:"Q6: Grid Puzzle", question:"▲ ▼ ▲ ▼ ▲ ?", options:["▲","▼","◆","●"], answer:1, example:"Symbols alternate in order"},
 {instructions:"Q7: Math Puzzle", question:"If 3×2=6, 4×3=12, 5×4=?, 6×5=?", options:["20,25","20,30","20,32","20,28"], answer:1, example:"Multiply numbers accordingly"},
 {instructions:"Q8: Word Logic", question:"Find the odd one out: Apple, Banana, Orange, Carrot", options:["Apple","Banana","Orange","Carrot"], answer:3, example:"One is a vegetable, others are fruits"},
