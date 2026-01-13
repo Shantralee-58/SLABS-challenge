@@ -37,7 +37,7 @@ function updateTimer() {
 
 // -------------------- 40 TRICKY QUESTIONS --------------------
 const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 12, 20, 30, ?", options:["36","40","42","44"], answer:2, example:"Add 4, 6, 8, 10,... → next number"},
-{instructions:"Q2: Word Decipher", question:"If A=1, B=20, C=3, what is DOG?", options:["64","57","48","50"], answer:1, example:"Sum letter values according to mapping A=1,B=20,C=3,..."},
+{instructions:"Q2: Word Decipher", question:"If A=1, B=20, C=3, what is DOG?", options:["64","57","48","50"], answer:0, example:"Sum letter values according to mapping A=1,B=20,C=3,..."},
 {instructions:"Q3: Grid Pattern", question:"⬛⬜⬛⬜ ⬛⬜⬛ ?", options:["⬛","⬜","⬜⬛","⬛⬛"], answer:1, example:"Pattern alternates black and white squares"}, 
 {instructions:"Q4: Math Logic", question:"1, 4, 9, 16, 25, ?", options:["30","36","35","40"], answer:1, example:"Squares of 1,2,3,4,5 → next square"},
 {instructions:"Q5: Letter Sequence", question:"A, C, F, J, O, ?", options:["T","S","U","R"], answer:1, example:"Positions of letters increase cumulatively"},
@@ -70,7 +70,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q31: Word Puzzle", question:"Synonym of 'Quick'?", options:["Fast","Slow","Lazy","Tardy"], answer:0, example:"Choose synonym"}, 
 {instructions:"Q32: Number Logic", question:"1,8,27,?,125", options:["49","64","81","100"], answer:1, example:"Cubes:1³,2³,..."}, 
 {instructions:"Q33: Grid Puzzle", question:"■ ▲ ■ ▲ ■ ?", options:["■","▲","▲■","■■"], answer:1, example:"Alternate pattern"}, 
-{instructions:"Q34: Letter Decipher", question:"A=1,B=2,...,Z=26, HELLO?", options:["52","48","50","44"], answer:2, example:"Sum letter values"}, 
+{instructions:"Q34: Letter Decipher", question:"A=1,B=2,...,Z=26, HELLO?", options:["52","48","50","44"], answer:0, example:"Sum letter values"}, 
 {instructions:"Q35: Logic Puzzle", question:"All cats animals, all animals have tails. Cats have tails?", options:["Yes","No","Cannot tell","Sometimes"], answer:0, example:"Apply logic"}, 
 {instructions:"Q36: Math Logic", question:"2,6,12,20,30, ?", options:["36","42","40","38"], answer:1, example:"Pattern +4,+6,+8,..."}, 
 {instructions:"Q37: Grid Pattern", question:"🔺🔻🔺🔻 ? 🔺🔻 ?", options:["🔺🔺","🔺🔻","🔻🔺","🔻🔻"], answer:1, example:"Alternates in pairs"}, 
