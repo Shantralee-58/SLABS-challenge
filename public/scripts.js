@@ -49,7 +49,8 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 // Add more questions with tricky patterns, mappings, grid puzzles 
 {instructions:"Q11: Number Logic", question:"5, 10, 20, 40, ?", options:["50","70","80","60"], answer:2, example:"Multiply by 2 each step"}, 
 {instructions:"Q12: Grid Puzzle", question:"Which number fills the blank?\n2 4 8\n3 6 12\n4 8 ?", options:["16","18","20","24"], answer:0, example:"Each row doubles the number"}, 
-{instructions:"Q13: Word Pattern", question:"fast, faster, fastest, ?", options:["fastestest","more fast","supreme","fastest"], answer:3, example:"Use superlative form"}, 
+{instructions:"Q13: Word Pattern", question:"fast, faster, ?",
+	options:["fastestest","more fast","supreme","fastest"], answer:3}, 
 {instructions:"Q14: Logic Puzzle", question:"Tom > Jack, Jack > Harry. Who is shortest?", options:["Tom","Jack","Harry","Cannot tell"], answer:2, example:"Shortest is the one lesser than others"},
 {instructions:"Q15: Number Sequence", question:"1,1,2,3,5,8, ?", options:["10","12","13","15"], answer:2, example:"Fibonacci sequence"}, 
 {instructions:"Q16: Word Decipher", question:"If PEN=16, NOTE=29, BOOK=?", options:["24","28","27","26"], answer:3, example:"Sum letter values using a given mapping pattern"}, 
