@@ -130,18 +130,49 @@ document.getElementById("skipBtn").addEventListener("click", ()=>{
 let cheatCount = 0;
 const maxCheats = 3;
 let testActive = true;
+
 function handleCheat(reason){
   if(!testActive) return;
+
   cheatCount++;
-  alert(`${reason} Violations: ${cheatCount}/${maxCheats}`);
+
+  allowBlur = false;
+  alert(`${reason}\n\nViolations: ${cheatCount}/${maxCheats}`);
+  allowBlur = true;
+
   if(cheatCount >= maxCheats){
-    alert("Too many violations. Test will end and you FAIL.");
+    allowBlur = false;
+    alert("Too many violations. The test will now end and you have FAILED.");
     endTest(true);
   }
 }
-window.addEventListener('blur', ()=> handleCheat("Do not leave the test window!"));
-window.addEventListener('contextmenu', (e)=>{ e.preventDefault(); handleCheat("Right-click is disabled!"); });
-window.addEventListener('keydown', (e)=>{ if(e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key==="I")) handleCheat("DevTools opening detected!"); });
+
+// Detect tab switching
+window.addEventListener('blur', () => {
+  if(allowBlur){
+    handleCheat("Do not leave the test window!");
+  }
+});
+
+// Disable right-click
+window.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  handleCheat("Right-click is disabled!");
+});
+
+// Detect DevTools
+window.addEventListener('keydown', (e) => {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && e.key === "I") ||
+    (e.ctrlKey && e.shiftKey && e.key === "J") ||
+    (e.ctrlKey && e.key === "U")
+  ) {
+    handleCheat("Developer tools are not allowed!");
+  }
+});
+
+
 
 // -------------------- END TEST --------------------
 function endTest(forceFail=false){
