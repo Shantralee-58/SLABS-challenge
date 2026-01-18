@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SouthernLabs Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1 id="resultTitle"></h1>
+  <p id="resultMessage"></p>
+  <div class="result-box">
+    <p><strong>Name:</strong> <span id="studentName"></span></p>
+    <p><strong>Score:</strong> <span id="score"></span> / 40</p>
+    <p><strong>Percentage:</strong> <span id="percent"></span>%</p>
+    <p><strong>Attempt:</strong> <span id="attempt"></span> / 2</p>
+  </div>
+</div>
+
+<script>
+let attempts = parseInt(localStorage.getItem("attempts")) || 0;
+attempts++;
+localStorage.setItem("attempts", attempts);
+
+const name = sessionStorage.getItem("studentName");
+const score = parseInt(sessionStorage.getItem("score"));
+const total = 40;
+const percent = Math.round((score/total)*100);
+
+document.getElementById("studentName").textContent = name;
+document.getElementById("score").textContent = score;
+document.getElementById("percent").textContent = percent;
+document.getElementById("attempt").textContent = attempts;
+
+const title = document.getElementById("resultTitle");
+const message = document.getElementById("resultMessage");
+
+if(percent >= 60){
+  title.textContent = "🎉 Congratulations!";
+  message.textContent = "Well done! SouthernLabs team will contact you soon.";
+} else {
+  title.textContent = "❌ Unfortunately";
+  message.textContent = "You did not pass the challenge. Thank you for trying.";
+}
+
+// Prevent back
+history.pushState(null, null, location.href);
+window.onpopstate = () => history.go(1);
+</script>
+</body>
+</html>
+

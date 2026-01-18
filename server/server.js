@@ -55,7 +55,8 @@ app.post("/submit-results", async (req, res) => {
   } = req.body;
 
   // ---------- Validation ----------
-  if (!studentName || !studentEmail || !studentDOB || !studentCourse || !studentContact || !studentAddress || !studentProvince) {
+  if (!studentName || !studentEmail || !studentDOB || !studentCourse || 
+      !studentContact || !studentAddress || !studentProvince) {
     return res.status(400).json({
       status: "error",
       message: "Missing required student information"
@@ -93,11 +94,11 @@ app.post("/submit-results", async (req, res) => {
 
         <p><strong>Student:</strong> ${studentName}</p>
         <p><strong>Email:</strong> ${studentEmail}</p>
-        <p><strong>Date of Birth</strong> ${studentDOB}</p>
+        <p><strong>Date of Birth:</strong> ${studentDOB}</p>
         <p><strong>Course:</strong> ${studentCourse}</p>
         <p><strong>Contact:</strong> ${studentContact}</p>
         <p><strong>Address:</strong> ${studentAddress}</p>
-	<p><strong>Province:</strong> ${studentProvince}</p>
+        <p><strong>Province:</strong> ${studentProvince}</p>
 
         <hr>
 
@@ -128,6 +129,6 @@ app.post("/submit-results", async (req, res) => {
 // -------------------- START SERVER --------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
 

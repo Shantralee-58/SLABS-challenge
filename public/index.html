@@ -2,113 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SouthernLabs Challenge 🏆</title>
+  <title>SouthernLabs Challenge - Registration</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+  <h1>SouthernLabs Challenge 🏆</h1>
+  <p>Please fill in your details to register for the test.</p>
 
-  <div class="container">
-    <h1>SouthernLabs Challenge 🏆</h1>
-    <p class="instructions">
-    <h2>Instructions: </h2>
-  <ol>
-    <li>You have 30 minutes to complete 40 logic-based questions.</li>
-    <li>Once you start the challenge, it must be completed in one sitting.</li>
-    <li>You may skip questions, but skipped questions cannot be revisited and will incur a negative score.</li>
-    <li>Do not open another tab, window, calculator, phone, or any external help during the test.</li>
-    <li>Leaving the page or attempting to cheat may result in automatic disqualification.</li>
-    <li>Manage your time carefully – the timer will not stop until the test ends.</li>
-  </ol>
-</p>
+  <div class="student-box">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
 
-    <div class="student-box">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
+    <label>Date of Birth</label>
+    <input type="date" id="dob" required>
 
-      <label>Date of Birth</label>
-      <input type="date" id="dob" required>
+    <label>Province</label>
+    <select id="province" required>
+      <option value="">Select Province</option>
+      <option value="Gauteng">Gauteng</option>
+      <option value="Western Cape">Western Cape</option>
+      <option value="Eastern Cape">Eastern Cape</option>
+      <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+      <option value="Free State">Free State</option>
+      <option value="Limpopo">Limpopo</option>
+      <option value="Mpumalanga">Mpumalanga</option>
+      <option value="North West">North West</option>
+      <option value="Northern Cape">Northern Cape</option>
+    </select>
 
-      <label>Province</label>
-      <select id="province" required>
-        <option value="">Select Province</option>
-        <option value="Gauteng">Gauteng</option>
-        <option value="Western Cape">Western Cape</option>
-        <option value="Eastern Cape">Eastern Cape</option>
-        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-        <option value="Free State">Free State</option>
-        <option value="Limpopo">Limpopo</option>
-        <option value="Mpumalanga">Mpumalanga</option>
-        <option value="North West">North West</option>
-        <option value="Northern Cape">Northern Cape</option>
-      </select>
+    <input type="tel" id="contact" placeholder="Contact Number" required>
+    <input type="text" id="address" placeholder="Home Address" required>
 
-      <input type="tel" id="contact" placeholder="Contact Number" required>
-      <input type="text" id="address" placeholder="Home Address" required>
+    <select id="course" required>
+      <option value="">Select Course</option>
+      <option value="applied_software_development">Applied Software Development</option>
+      <option value="software_engineering">Software Engineering</option>
+      <option value="it_concepts">IT Concepts</option>
+    </select>
 
-      <select id="course" required>
-        <option value="">Select Course</option>
-        <option value="applied_software_development">Applied Software Development</option>
-        <option value="software_engineering">Software Engineering</option>
-        <option value="it_concepts">IT Concepts</option>
-      </select>
-
-      <button id="startBtn">Start Test</button>
-    </div>
+    <button id="registerBtn">Register</button>
   </div>
+</div>
 
-  <!-- ===================== SCRIPT ===================== -->
-  <script>
-  
-  // -------------------- LIMIT DOB --------------------
-  const dobInput = document.getElementById("dob");
-  const today = new Date();
-  const year = today.getFullYear() - 16; // 16 years old
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+<script>
+const dobInput = document.getElementById("dob");
+const today = new Date();
+const year = today.getFullYear() - 16;
+const month = String(today.getMonth() + 1).padStart(2, "0");
+const day = String(today.getDate()).padStart(2, "0");
+dobInput.max = `${year}-${month}-${day}`;
 
-  // Set max attribute so they can't select younger than 16
-  dobInput.max = `${year}-${month}-${day}`;
-    document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("registerBtn").addEventListener("click", () => {
+  let attempts = parseInt(localStorage.getItem("attempts")) || 0;
+  if (attempts >= 20) {
+    alert("You have already used your 2 attempts.");
+    window.location.href = "locked.html";
+    return;
+  }
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const dob = document.getElementById("dob").value;
-      const province = document.getElementById("province").value;
-      const course = document.getElementById("course").value;
-      const contact = document.getElementById("contact").value.trim();
-      const address = document.getElementById("address").value.trim();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const dob = document.getElementById("dob").value;
+  const province = document.getElementById("province").value;
+  const course = document.getElementById("course").value;
+  const contact = document.getElementById("contact").value.trim();
+  const address = document.getElementById("address").value.trim();
 
-      if (!name || !email || !dob || !province || !course || !contact || !address) {
-        alert("Please fill in all fields.");
-        return;
-      }
+  if (!name || !email || !dob || !province || !course || !contact || !address) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-    // Extra validation: ensure student is at least 16
-    const dobDate = new Date(dob);
-    const minDob = new Date();
-    minDob.setFullYear(minDob.getFullYear() - 16);
-    if (dobDate > minDob) {
-      alert("You must be at least 16 years old to take this test.");
-      return;
-    }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
 
-      // Save student info
-      sessionStorage.setItem("studentName", name);
-      sessionStorage.setItem("studentEmail", email);
-      sessionStorage.setItem("studentDOB", dob);
-      sessionStorage.setItem("studentProvince", province);
-      sessionStorage.setItem("studentCourse", course);
-      sessionStorage.setItem("studentContact", contact);
-      sessionStorage.setItem("studentAddress", address);
-      sessionStorage.setItem("currentQuestion", "0");
-      sessionStorage.setItem("score", "0");
-      sessionStorage.setItem("startTime", new Date().toISOString());
+  const dobDate = new Date(dob);
+  const minDob = new Date();
+  minDob.setFullYear(minDob.getFullYear() - 16);
+  if (dobDate > minDob) {
+    alert("You must be at least 16 years old.");
+    return;
+  }
 
-      // Start test
-      window.location.href = "test.html";
-    });
-  </script>
+  // Save student info
+  sessionStorage.setItem("studentName", name);
+  sessionStorage.setItem("studentEmail", email);
+  sessionStorage.setItem("studentDOB", dob);
+  sessionStorage.setItem("studentProvince", province);
+  sessionStorage.setItem("studentCourse", course);
+  sessionStorage.setItem("studentContact", contact);
+  sessionStorage.setItem("studentAddress", address);
+  sessionStorage.setItem("currentQuestion", "0");
+  sessionStorage.setItem("score", "0");
+  sessionStorage.setItem("skippedQuestions", JSON.stringify([]));
+  sessionStorage.setItem("startTime", new Date().toISOString());
 
+  window.location.href = "instructions.html";
+});
+</script>
 </body>
 </html>
 

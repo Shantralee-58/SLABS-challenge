@@ -182,22 +182,28 @@ window.addEventListener('keydown', (e) => {
 
 
 // -------------------- END TEST --------------------
-function endTest(forceFail=false){
+function endTest(forceFail = false) {
   testActive = false;
   clearInterval(timerInterval);
+
   const percent = forceFail ? 0 : Math.floor((score / questions.length) * 100);
   const pass = !forceFail && percent >= passMark;
 
-  finalResultEl.innerHTML = `<p class="${pass ? 'pass' : 'fail'}">
-    ${pass ? 'PASSED ✅' : 'FAILED ❌'}<br>
-    Score: ${percent}% (${score}/${questions.length})
-  </p>`;
+  // Track attempts
+  let attempts = parseInt(localStorage.getItem("attempts")) || 0;
+  attempts++;
+  localStorage.setItem("attempts", attempts);
 
+  // Save results in sessionStorage for result.html
+  sessionStorage.setItem("score", score);
+  sessionStorage.setItem("percent", percent);
+  sessionStorage.setItem("pass", pass ? "true" : "false");
+  sessionStorage.setItem("attempt", attempts);
 
-  // Send results to server
+  // -------------------- SEND RESULTS TO SERVER --------------------
   fetch("/submit-results", {
     method: "POST",
-    headers: {'Content-Type':'application/json'},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       studentName,
       studentEmail,
@@ -207,14 +213,23 @@ function endTest(forceFail=false){
       studentContact,
       studentAddress,
       score,
-      totalQuestions,
+      totalQuestions: questions.length,
       percent
     })
   })
-  .then(res => res.json())
-  .then(data => console.log('Email status:', data.message))
-  .catch(err => console.error('Email error:', err));
+    .then(res => res.json())
+    .then(data => {
+      console.log("Email status:", data.message);
+      // Redirect after sending results
+      window.location.href = "result.html";
+    })
+    .catch(err => {
+      console.error("Email error:", err);
+      // Redirect anyway, don't block student
+      window.location.href = "result.html";
+    });
 }
+
 
 // -------------------- START BUTTON --------------------
 document.getElementById("startBtn").addEventListener("click", () => {
@@ -242,5 +257,5 @@ document.getElementById("startBtn").addEventListener("click", () => {
   sessionStorage.setItem("score", "0");
   sessionStorage.setItem("startTime", new Date());
 
-  window.location.href = "test.html";
+  window.location.href = "result.html";
 });
