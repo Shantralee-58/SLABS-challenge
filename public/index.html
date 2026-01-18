@@ -10,11 +10,15 @@
   <div class="container">
     <h1>SouthernLabs Challenge 🏆</h1>
     <p class="instructions">
-  You have <strong>1 hour</strong> to complete <strong>40 logic-based questions</strong>.<br>
-  <strong>Important:</strong> Once you start the challenge, it must be completed in <strong>one sitting</strong>.<br>
-  You may skip questions, but <strong>skipped questions cannot be revisited</strong>.<br>
-  Do not open another tab, window, calculator, phone, or any external help during the test.<br>
-  Leaving the page or trying to cheat may result in <strong>automatic disqualification</strong>.
+    <h2>Instructions: </h2>
+  <ol>
+    <li>You have 30 minutes to complete 40 logic-based questions.</li>
+    <li>Once you start the challenge, it must be completed in one sitting.</li>
+    <li>You may skip questions, but skipped questions cannot be revisited and will incur a negative score.</li>
+    <li>Do not open another tab, window, calculator, phone, or any external help during the test.</li>
+    <li>Leaving the page or attempting to cheat may result in automatic disqualification.</li>
+    <li>Manage your time carefully – the timer will not stop until the test ends.</li>
+  </ol>
 </p>
 
     <div class="student-box">
@@ -54,6 +58,16 @@
 
   <!-- ===================== SCRIPT ===================== -->
   <script>
+  
+  // -------------------- LIMIT DOB --------------------
+  const dobInput = document.getElementById("dob");
+  const today = new Date();
+  const year = today.getFullYear() - 16; // 16 years old
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  // Set max attribute so they can't select younger than 16
+  dobInput.max = `${year}-${month}-${day}`;
     document.getElementById("startBtn").addEventListener("click", () => {
 
       const name = document.getElementById("name").value.trim();
@@ -68,6 +82,15 @@
         alert("Please fill in all fields.");
         return;
       }
+
+    // Extra validation: ensure student is at least 16
+    const dobDate = new Date(dob);
+    const minDob = new Date();
+    minDob.setFullYear(minDob.getFullYear() - 16);
+    if (dobDate > minDob) {
+      alert("You must be at least 16 years old to take this test.");
+      return;
+    }
 
       // Save student info
       sessionStorage.setItem("studentName", name);

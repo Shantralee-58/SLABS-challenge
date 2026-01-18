@@ -15,24 +15,32 @@ const passMark = 60;
 
 // -------------------- TIMER --------------------
 let startTime = sessionStorage.getItem("startTime");
-if(!startTime){
+if (!startTime) {
   startTime = new Date();
   sessionStorage.setItem("startTime", startTime);
 }
-const endTime = new Date(new Date(startTime).getTime() + 1*60*60*1000);
+
+// Set end time to 30 minutes from start
+const endTime = new Date(new Date(startTime).getTime() + 30 * 60 * 1000);
+
 const timerEl = document.getElementById("timer");
 let timerInterval = setInterval(updateTimer, 1000);
 
 function updateTimer() {
   const now = new Date();
-  let diff = Math.floor((endTime - now)/1000);
-  if(diff <= 0){ diff=0; endTest(); }
-  const h = String(Math.floor(diff/3600)).padStart(2,'0');
-  const m = String(Math.floor((diff%3600)/60)).padStart(2,'0');
-  const s = String(diff%60).padStart(2,'0');
+  let diff = Math.floor((endTime - now) / 1000);
+
+  if (diff <= 0) {
+    diff = 0;
+    endTest();
+  }
+
+  const h = String(Math.floor(diff / 3600)).padStart(2, "0");
+  const m = String(Math.floor((diff % 3600) / 60)).padStart(2, "0");
+  const s = String(diff % 60).padStart(2, "0");
+
   timerEl.textContent = `Time Left: ${h}:${m}:${s}`;
 }
-
 
 
 // -------------------- 40 TRICKY QUESTIONS --------------------
@@ -43,13 +51,13 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q5: Letter Sequence", question:"A, C, F, J, O, ?", options:["T","S","U","R"], answer:2, example:"Positions of letters increase cumulatively"},
 {instructions:"Q6: Grid Puzzle", question:"▲ ▼ ▲ ▼ ▲ ?", options:["▲","▼","◆","●"], answer:1, example:"Symbols alternate in order"},
 {instructions:"Q7: Math Puzzle", question:"If 3×2=6, 4×3=12, 5×4=?, 6×5=?", options:["20,25","20,30","20,32","20,28"], answer:1, example:"Multiply numbers accordingly"},
-{instructions:"Q8: Word Logic", question:"Find the odd one out: Apple, Banana, Orange, Carrot", options:["Apple","Banana","Orange","Carrot"], answer:3, example:"One is a vegetable, others are fruits"},
+{instructions:"Q8: Logical Reasoning", question:"Four people need to cross a bridge at night. They have one torch and the bridge is too dangerous to cross without it. Only two people can cross at a time, and they must carry the torch. When two cross together, they move at the speed of the slower person. Times to cross: A = 1 minute B = 2 minutes C = 7 minutes D = 10 minutes What is the minimum total time for all four to cross?", options:["8 minutes","15 minutes","17 minutes","21 minutes"], answer:2, example:"Only 2 cross at once. Torch must return. Think who should bring the torch back to minimize total crossing time."},
 {instructions:"Q9: Number Puzzle", question:"If 2+3=10, 3+4=21, 4+5=?, 5+6=?", options:["30,35","35,41","36,55","40,50"], answer:2, example:"Follow the pattern: a+b → a*b + b"}, 
 {instructions:"Q10: Word Decipher", question:"If Z=1, Y=2, X=3… what is CAT?", options:["54","26","57","23"], answer:2, example:"Sum the letter values according to the reversed alphabet mapping"}, 
 // Add more questions with tricky patterns, mappings, grid puzzles 
 {instructions:"Q11: Number Logic", question:"5, 10, 20, 40, ?", options:["50","70","80","60"], answer:2, example:"Multiply by 2 each step"}, 
 {instructions:"Q12: Grid Puzzle", question:"Which number fills the blank?\n2 4 8\n3 6 12\n4 8 ?", options:["16","18","20","24"], answer:0, example:"Each row doubles the number"}, 
-{instructions:"Q13: Word Pattern", question:"fast, faster, ?", example: "Which word comes next?", options:["fastestest","more fast","supreme","fastest"], answer:3}, 
+{instructions:"Q13: Word Pattern", question:"fast, faster, ?", example: "Look at the pattern: positive → comparative → ? (superlative form)", options:["fastestest","more fast","supreme","fastest"], answer:3}, 
 {instructions:"Q14: Logic Puzzle", question:"Tom > Jack, Jack > Harry. Who is shortest?", options:["Tom","Jack","Harry","Cannot tell"], answer:2, example:"Shortest is the one lesser than others"},
 {instructions:"Q15: Number Sequence", question:"1,1,2,3,5,8, ?", options:["10","12","13","15"], answer:2, example:"Fibonacci sequence"}, 
 {instructions:"Q16: Logical Reasoning", question:"A train travels 360 km in 4 hours. How long will it take to travel 540 km at the same speed?", options:["5 hours","6 hours","7 hours","8 hours"], answer:1, example:"Speed = Distance / Time"}, 
@@ -61,7 +69,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q22: Number Logic", question:"3, 9, 27, ?", options:["54","81","72","90"], answer:1, example:"Multiply by 3 each step"}, 
 {instructions:"Q23: Grid Sequence", question:"1,2,4,7,11, ?", options:["16","17","18","19"], answer:0, example:"Add increasing differences +1,+2,+3,..."}, 
 {instructions:"Q24: Logic Puzzle", question:"Three people — Alex, Ben, and Chris — write a test.\n\n• Alex scored more than Ben\n• Chris scored less than Alex\n• Ben did NOT score last\n\nWho scored the lowest?", options:["Alex", "Ben", "Chris", "Cannot be determined"], answer:2, example:"The one who scored lower than others"}, 
-{instructions:"Q25: Logical Reasoning", question:"A train travels 120 km at 60 km/h and returns at 40 km/h.\n\nWhat is the average speed for the entire journey?", options:["48 km/h", "50 km/h", "45 km/h", "40 km/h"], answer:0, example:"Speed = Distance / Time"}, 
+{instructions:"Q25: Logical Reasoning", question:"A train travels 120 km at 60 km/h and returns at 40 km/h.\n\nWhat is the average speed for the entire journey?", options:["48 km/h", "50 km/h", "45 km/h", "40 km/h"], answer:0, example:"Average speed = 2ab / (a + b). NB: a = speed going, b = speed returning"}, 
 {instructions:"Q26: Number Pattern", question:"5,10,20,35, ?", options:["50","55","60","65"], answer:1, example:"Differences increase +5,+10,+15,..."}, 
 {instructions:"Q27: Word Logic", question:"Antonym of 'Expand'?", options:["Contract","Extend","Open","Increase"], answer:0, example:"Opposite meaning"}, 
 {instructions:"Q28: Grid Puzzle", question:"🔴 🔵 🔴 🔵 🔴 ?", options:["🔴","🔵","🔵🔴","🔴🔴"], answer:1, example:"Symbols alternate"}, 
@@ -73,8 +81,8 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q34: Logic Reasoning", question:"If ALL ZIBS are BANS and ALL BANS are TOMS, which statement must be true?", options:["All TOMS are ZIBS", "Some TOMS are ZIBS", "All ZIBS are TOMS", "Some ZIBS are not TOMS"], answer:2, example:"If A ⊆ B and B ⊆ C, then A ⊆ C"}, 
 {instructions:"Q35: Logic Puzzle", question:"All cats animals, all animals have eyes. Cats have tails?", options:["Yes","No","Cannot tell","Sometimes"], answer:0, example:"Apply logic"}, 
 {instructions:"Q36: Math Logic", question:"The ratio of boys to girls in a class is 3 : 5. If there are 24 boys, how many girls are there?", options:["30","32","40","48"], answer:2, example:"Value per part = Known value / Known ratio part"}, 
-{instructions:"Q37: Grid Pattern", question:"🔺🔻🔺🔻 ? 🔺🔻 ?", options:["🔺🔺","🔺🔻","🔻🔺","🔻🔻"], answer:1, example:"Alternates in pairs"}, 
-{instructions:"Q38: Number Logic", question:"A father is 4 times as old as his son. In 12 years, he will be twice as old as his son. How old is the father now?", options:["32","36","40","48"], answer:2, example:"Let age be X"}, 
+{instructions:"Q37: Number Logic", question:"8 workers can complete a job in 15 days. After working for 5 days, 4 more workers join them. How many more days will it take to finish the remaining work?", options:["6¼ days","6⅔ days","7 days","7½ days"], answer:1, example:"Workers × Days = Total Work"}, 
+{instructions:"Q38: Number Logic", question:"A father is 4 times as old as his son. In 12 years, he will be twice as old as his son. How old is the father now?", options:["32","27","24","40"], answer:2, example:"Let age be X"}, 
 {instructions:"Q39: Number Puzzle", question:"1,3,6,10,15, ?", options:["20","21","19","18"], answer:1, example:"Triangular numbers"}, 
 {instructions:"Q40: Logic Puzzle", question:"Circle, Triangle, Square, Circle, Triangle, ?", options:["Square","Circle","Triangle","Rectangle"], answer:0, example:"Repeats sequence"}];
 
