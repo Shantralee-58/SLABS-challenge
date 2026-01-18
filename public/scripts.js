@@ -79,7 +79,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q32: Number Logic", question:"1,8,27,?,125", options:["49","64","81","100"], answer:1, example:"Cubes:1³,2³,..."}, 
 {instructions:"Q33: Grid Puzzle", question:"■ ▲ ■ ▲ ■ ?", options:["■","▲","▲■","■■"], answer:1, example:"Alternate pattern"}, 
 {instructions:"Q34: Logic Reasoning", question:"If ALL ZIBS are BANS and ALL BANS are TOMS, which statement must be true?", options:["All TOMS are ZIBS", "Some TOMS are ZIBS", "All ZIBS are TOMS", "Some ZIBS are not TOMS"], answer:2, example:"If A ⊆ B and B ⊆ C, then A ⊆ C"}, 
-{instructions:"Q35: Logic Puzzle", question:"All cats animals, all animals have eyes. Cats have tails?", options:["Yes","No","Cannot tell","Sometimes"], answer:0, example:"Apply logic"}, 
+{instructions:"Q35: Logic Puzzle", question:"All cats are animals, all animals have eyes. Cats have tails?", options:["Yes","No","Cannot tell","Sometimes"], answer:0, example:"Apply logic"}, 
 {instructions:"Q36: Math Logic", question:"The ratio of boys to girls in a class is 3 : 5. If there are 24 boys, how many girls are there?", options:["30","32","40","48"], answer:2, example:"Value per part = Known value / Known ratio part"}, 
 {instructions:"Q37: Number Logic", question:"8 workers can complete a job in 15 days. After working for 5 days, 4 more workers join them. How many more days will it take to finish the remaining work?", options:["6¼ days","6⅔ days","7 days","7½ days"], answer:1, example:"Workers × Days = Total Work"}, 
 {instructions:"Q38: Number Logic", question:"A father is 4 times as old as his son. In 12 years, he will be twice as old as his son. How old is the father now?", options:["32","27","24","40"], answer:2, example:"Let age be X"}, 
