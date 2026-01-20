@@ -21,7 +21,7 @@ if (!startTime) {
 }
 
 // Set end time to 30 minutes from start
-const endTime = new Date(new Date(startTime).getTime() + 30 * 60 * 1000);
+const endTime = new Date(new Date(startTime).getTime() + 60 * 60 * 1000);
 
 const timerEl = document.getElementById("timer");
 let timerInterval = setInterval(updateTimer, 1000);
