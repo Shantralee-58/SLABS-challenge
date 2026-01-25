@@ -55,7 +55,7 @@ dobInput.max = `${year}-${month}-${day}`;
 
 document.getElementById("registerBtn").addEventListener("click", () => {
   let attempts = parseInt(localStorage.getItem("attempts")) || 0;
-  if (attempts >= 10) {
+  if (attempts >= 15) {
     alert("You have already used your attempts.");
     window.location.href = "locked.html";
     return;
