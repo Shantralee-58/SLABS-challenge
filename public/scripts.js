@@ -72,7 +72,7 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q25: Logical Reasoning", question:"A train travels 120 km at 60 km/h and returns at 40 km/h.\n\nWhat is the average speed for the entire journey?", options:["48 km/h", "50 km/h", "45 km/h", "40 km/h"], answer:0, example:"Average speed = 2ab / (a + b). NB: a = speed going, b = speed returning"}, 
 {instructions:"Q26: Number Pattern", question:"5,10,20,35, ?", options:["50","55","60","65"], answer:1, example:"Differences increase +5,+10,+15,..."}, 
 {instructions:"Q27: Word Logic", question:"Antonym of 'Expand'?", options:["Contract","Extend","Open","Increase"], answer:0, example:"Opposite meaning"}, 
-{instructions:"Q28: Grid Puzzle", question:"🔴 🔵 🔴 🔵 🔴 ?", options:["🔴","🔵","🔵🔴","🔴🔴"], answer:1, example:"Symbols alternate"}, 
+{instructions:"Q28: Pattern Recognition", question:"Give the next three numbers: ?", options:["12,7,3","6,5,7","11,5,14","14, 17, 12"], answer:2, example: ["5","14","2","7", "11", "6", "9", "8", "10"]"}, 
 {instructions:"Q29: Math Puzzle", question:"2x5=12, 3x6=21, 4x7=?", options:["30","33","35","32"], answer:3, example:"Use pattern (a*b)+a"}, 
 {instructions:"Q30: Letter Series", question:"Z, X, U, Q, ?", options:["L","N","O","P"], answer:0, example:"Decreasing letter positions -2,-3,-4,-5"}, 
 {instructions:"Q31: Word Puzzle", question:"Synonym of 'Quick'?", options:["Fast","Slow","Lazy","Tardy"], answer:0, example:"Choose synonym"}, 
