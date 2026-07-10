@@ -83,8 +83,8 @@ const questions = [ {instructions:"Q1: Number Sequence Logic", question:"2, 6, 1
 {instructions:"Q37: Number Logic", question:"8 workers can complete a job in 15 days. After working for 5 days, 4 more workers join them. How many more days will it take to finish the remaining work?", options:["6¼ days","6⅔ days","7 days","7½ days"], answer:1, example:"Workers × Days = Total Work"}, 
 {instructions:"Q38: Number Logic", question:"A father is 4 times as old as his son. In 12 years, he will be twice as old as his son. How old is the father now?", options:["32","27","24","40"], answer:2, example:"Let age be X"}, 
 {instructions:"Q39: Number Puzzle", question:"1,3,6,10,15, ?", options:["20","21","19","18"], answer:1, example:"Triangular numbers"}, 
-{instructions: "Q40: Pattern Recognition", question: "Find the next three numbers:\n\n2, 3, 5, 8, 13, 21, ?", options: ["33, 54, 87","31, 44, 75","34, 55, 89","32, 53, 85"], answer: 2, example: "Each number is the sum of the previous two (Fibonacci sequence)."},
-
+{instructions: "Q40: Pattern Recognition", question: "Find the next three numbers:\n\n2, 3, 5, 8, 13, 21, ?", options: ["33, 54, 87","31, 44, 75","34, 55, 89","32, 53, 85"], answer: 2, example: "Each number is the sum of the previous two (Fibonacci sequence)."}
+];
 // -------------------- DOM ELEMENTS --------------------
 const instructionsEl = document.getElementById("instructions");
 const questionEl = document.getElementById("question");
